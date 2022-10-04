@@ -4,6 +4,7 @@ using JwtTokenSample.Models;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace JwtTokenSample.Controllers
 {
@@ -48,6 +49,17 @@ namespace JwtTokenSample.Controllers
             var user = SessionUser.GetSessionUser();
             return Ok(user);
         }
-
+        [Authorize(Roles ="FocalPoint")]
+        [HttpGet]
+        [Route("employee-profile")]
+        public IActionResult GetEmployeeProfile(string userName)
+        {
+            var user = _context.UserInfos.FirstOrDefault(x => x.UserName == userName);
+            if (user == null)
+            {
+                return NotFound();
+            }            
+            return Ok(user);
+        }
     }
 }

@@ -18,6 +18,7 @@ namespace LeasePortal.Extensions
                      In = ParameterLocation.Header,
                      Description = "Please enter a valid token",
                      Name = "Authorization",
+
                      Type = SecuritySchemeType.Http,
                      BearerFormat = "JWT",
                      Scheme = "Bearer"
